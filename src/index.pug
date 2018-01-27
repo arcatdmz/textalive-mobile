@@ -1,0 +1,30 @@
+mixin header(message)
+  h1.ui.header
+    i.lab.icon
+    .content #{message}
+  .ui.divider
+
+mixin body
+  section: .ui.segment
+    p Hello world!
+
+mixin footer
+  .ui.divider
+  footer.ui.horizontal.divided.list
+    .item &copy; <a href="https://junkato.jp/ja">Jun Kato</a>
+    .item 2018
+
+doctype html
+html(lang='ja')
+  head
+    title Hello World!
+    link(rel='stylesheet', href='semantic/semantic.min.css')
+    style(type='text/css').
+      footer { text-align: center; }
+  body
+    .ui.container
+      .ui.basic.segment: +header(package.name)
+      +body()
+      .ui.basic.center.aligned.segment: +footer()
+    script(src='javascripts/jquery-3.2.1.min.js')
+    script(src='semantic/semantic.min.js')
