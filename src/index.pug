@@ -4,9 +4,46 @@ mixin header(message)
     .content #{message}
   .ui.divider
 
+mixin music-selector()
+  label(for='music') #{ja ? 'おすすめ楽曲から選ぶ:' : 'Our recommendations:'}
+  - for (var i = 0; i < songs.length; i ++) {
+  - var song = songs[i];
+  .field: .ui.radio.checkbox
+    input.hidden(type='radio', name='music', tabindex='0', value=song.url, checked=(i === 0 ? 'checked' : undefined))
+    label #{song.title} / #{song.artist} (
+      - if (song.type === "MP3") {
+      span(data-href=song.url) #{song.type}
+      - } else {
+      a(href=song.url, target='_blank') #{song.type}
+      - }
+      | )
+  - }
+
+mixin music-searcher
+  label(for='music-search') #{ja ? '楽曲を探す:' : 'Look for your favorite song:'}
+  form.ui.action.input
+    input(type='text', placeholder=ja ? '曲名, アーティスト名, URLなど' : 'Song name, artist name, URL, etc.', name='music-search')
+    button.ui.button #{ja ? '検索' : 'Search'}
+
 mixin body
+  -
+    const songs = [], ja = true;
   section: .ui.segment
-    p Hello world!
+    h2.ui.dividing.header
+      i.music.icon
+      .content #{ja ? '音楽の選択' : 'Choose your song'}
+        .sub.header #{ja ? 'Songleに登録されている111万曲以上から選択' : 'Over a million and a hundred thousand of songs are available'}
+    .ui.form
+      .ui.stackable.grid
+        .eight.wide.column
+          .grouped.fields#music-selector: +music-selector()
+        .eight.wide.column
+          .field#music-searcher: +music-searcher()
+      .ui.warning.message #{ja ? '検索結果が見つかりませんでした。' : 'Your search query returned zero result.'}
+      .ui.center.aligned.basic.segment#start
+        button.ui.huge.primary.button(type='submit')
+          i.video.play.icon
+          | #{ja ? '再生する' : 'Play music'}
 
 mixin footer
   .ui.divider
@@ -23,7 +60,7 @@ html(lang='ja')
       footer { text-align: center; }
   body
     .ui.container
-      .ui.basic.segment: +header(package.name)
+      .ui.basic.segment: +header(package.description)
       +body()
       .ui.basic.center.aligned.segment: +footer()
     script(src='javascripts/jquery-3.2.1.min.js')

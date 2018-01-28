@@ -9,13 +9,36 @@
     <div class="ui container">
       <div class="ui basic segment">
         <h1 class="ui header"><i class="lab icon"></i>
-          <div class="content">textalive-mobile</div>
+          <div class="content">TextAlive Mobile</div>
         </h1>
         <div class="ui divider"></div>
       </div>
       <section>
         <div class="ui segment">
-          <p>Hello world!</p>
+          <h2 class="ui dividing header"><i class="music icon"></i>
+            <div class="content">音楽の選択
+              <div class="sub header">Songleに登録されている111万曲以上から選択</div>
+            </div>
+          </h2>
+          <div class="ui form">
+            <div class="ui stackable grid">
+              <div class="eight wide column">
+                <div class="grouped fields" id="music-selector">
+                  <label for="music">おすすめ楽曲から選ぶ:</label>
+                </div>
+              </div>
+              <div class="eight wide column">
+                <div class="field" id="music-searcher">
+                  <label for="music-search">楽曲を探す:</label>
+                  <form class="ui action input">
+                    <input type="text" placeholder="曲名, アーティスト名, URLなど" name="music-search"/>
+                    <button class="ui button">検索</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="ui warning message">検索結果が見つかりませんでした。</div>
+          </div>
         </div>
       </section>
       <div class="ui basic center aligned segment">

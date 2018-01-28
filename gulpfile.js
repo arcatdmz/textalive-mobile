@@ -17,6 +17,7 @@ gulp.task('pug', function(){
 
 gulp.task('browser-sync', function(){
     browserSync({
+      port: 8080,
       server: {
         baseDir: 'docs/'
       }
