@@ -21,6 +21,8 @@
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
     "gulp-pug": "^3.3.0",
-    "semantic-ui": "^2.2.13"
+    "gulp-typescript": "^3.2.4",
+    "semantic-ui": "^2.2.13",
+    "typescript": "^2.6.2"
   }
 }

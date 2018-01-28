@@ -3,6 +3,9 @@ const pug = require('gulp-pug');
 const browserSync = require('browser-sync');
 const packageJson = require('./package.json');
 
+const ts = require('gulp-typescript');
+const tsProject = ts.createProject('tsconfig.json');
+
 gulp.task('semantic', require('./semantic/tasks/build'));
 
 gulp.task('pug', function(){
@@ -13,6 +16,12 @@ gulp.task('pug', function(){
       pretty: true
     }))
     .pipe(gulp.dest('docs/'));
+});
+
+gulp.task('ts', function(){
+  return gulp.src('src/typescripts/**/*.ts')
+    .pipe(tsProject())
+    .pipe(gulp.dest('docs/javascripts/'));
 });
 
 gulp.task('browser-sync', function(){
