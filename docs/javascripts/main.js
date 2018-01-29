@@ -102,6 +102,18 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
         $('body').dimmer('hide');
         setStartButtonEnabled(true);
         Player = p;
+        const queries = parseQueryString();
+        if (typeof queries.url === 'string') {
+            const prefillUrl = decodeURIComponent(queries.url), $radio = $('#music-selector input[type=radio]').filter((i, e) => { return $(e).val() === prefillUrl; });
+            console.log(prefillUrl);
+            if ($radio.length > 0) {
+                $radio.parent().checkbox('check');
+            }
+            else {
+                $('#music-searcher input[name=music-search]').val(prefillUrl);
+                $('#music-searcher form').submit();
+            }
+        }
     };
     // 「再生する」ボタン
     $('#start button').on('click touch', (ev) => {
@@ -140,6 +152,20 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
     function isURL(url) {
         return url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
     }
+    function parseQueryString() {
+        var queryString = location.search;
+        var parameters = {};
+        if (queryString.charAt(0) !== '?') {
+            return {};
+        }
+        var q = queryString.substring(1).split('&');
+        for (var i = 0; i < q.length; i++) {
+            const e = q[i], key = e.substring(0, e.indexOf('=')), value = e.substring(key.length + 1);
+            parameters[key] = value;
+        }
+        return parameters;
+    }
+    exports.parseQueryString = parseQueryString;
     // 引数がメディアURLならその情報をSongleから取得する
     // それ以外なら false を返す
     function handleMediaUrl(url) {

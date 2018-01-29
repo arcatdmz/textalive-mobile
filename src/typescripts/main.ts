@@ -18,6 +18,19 @@ setStartButtonEnabled(false);
   $('body').dimmer('hide');
   setStartButtonEnabled(true);
   Player = p;
+
+  const queries = parseQueryString();
+
+  if (typeof queries.url === 'string') {
+    const prefillUrl = decodeURIComponent(queries.url)
+      , $radio = $('#music-selector input[type=radio]').filter((i, e) => { return $(e).val() === prefillUrl });
+    if ($radio.length > 0) {
+      $radio.parent().checkbox('check');
+    } else {
+      $('#music-searcher input[name=music-search]').val(prefillUrl);
+      $('#music-searcher form').submit();
+    }
+  }
 }
 
 // 「再生する」ボタン
@@ -57,6 +70,22 @@ $('#music-searcher form').on('submit', (ev) => {
 
 function isURL(url: string) {
   return url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
+}
+
+export function parseQueryString() {
+  var queryString = location.search;
+  var parameters: any = {};
+  if (queryString.charAt(0) !== '?') {
+    return {};
+  }
+  var q = queryString.substring(1).split('&');
+  for (var i = 0; i < q.length; i ++) {
+    const e = q[i]
+      , key = e.substring(0, e.indexOf('='))
+      , value = e.substring(key.length + 1);
+    parameters[key] = value;
+  }
+  return parameters;
 }
 
 // 引数がメディアURLならその情報をSongleから取得する
