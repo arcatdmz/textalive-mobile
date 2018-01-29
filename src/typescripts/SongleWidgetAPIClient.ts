@@ -72,7 +72,7 @@ export class Song {
 
 export function stripProtocol(url: string) {
   var stripper = /^(ht|f)tps?:\/\/(.+)$/.exec(url);
-  if (stripper) url = stripper[1];
+  if (stripper) url = stripper[2];
   return url;
 }
 
