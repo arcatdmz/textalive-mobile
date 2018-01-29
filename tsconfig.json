@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "target" : "es2015",
-    "module": "es2015",
+    "module": "amd",
     "strict": true,
     "rootDir" : "src/typescripts",
-    "outDir": "docs/javascripts"
-  }
+    "outFile": "docs/javascripts/main.js"
+  },
+  "include": [
+    "src/typescripts/main.ts"
+  ]
 }

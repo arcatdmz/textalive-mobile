@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>Hello World!</title>
+    <title>TextAlive Mobile</title>
     <link rel="stylesheet" href="semantic/semantic.min.css">
     <style type="text/css">footer { text-align: center; }</style>
   </head>
   <body>
+    <div class="ui dimmer">
+      <div class="ui text loader">読み込み中…</div>
+    </div>
     <div class="ui container">
       <div class="ui basic segment">
         <h1 class="ui header"><i class="lab icon"></i>
@@ -13,7 +16,7 @@
         </h1>
         <div class="ui divider"></div>
       </div>
-      <section>
+      <section id="input">
         <div class="ui segment">
           <h2 class="ui dividing header"><i class="music icon"></i>
             <div class="content">音楽の選択
@@ -25,6 +28,20 @@
               <div class="eight wide column">
                 <div class="grouped fields" id="music-selector">
                   <label for="music">おすすめ楽曲から選ぶ:</label>
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input class="hidden" type="radio" name="music" tabindex="0" value="http://piapro.jp/t/QVs8/20110115011217" checked="checked"/>
+                      <label>妄想スケッチ / 40メートルP (<a href="http://piapro.jp/t/QVs8/20110115011217" target="_blank">piapro</a>)
+                      </label>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input class="hidden" type="radio" name="music" tabindex="0" value="http://www.nicovideo.jp/watch/sm6326371"/>
+                      <label>tripster / リツカ (<a href="http://www.nicovideo.jp/watch/sm6326371" target="_blank">nicovideo</a>)
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="eight wide column">
@@ -35,10 +52,24 @@
                     <button class="ui button">検索</button>
                   </form>
                 </div>
+                <div class="ui warning message">検索結果が見つかりませんでした。</div>
               </div>
             </div>
-            <div class="ui warning message">検索結果が見つかりませんでした。</div>
+            <div class="ui center aligned basic segment" id="start">
+              <button class="ui huge primary button"><i class="video play icon"></i>再生する</button>
+            </div>
           </div>
+        </div>
+      </section>
+      <div class="ui hidden divider"></div>
+      <section id="output">
+        <div class="ui segment">
+          <h2 class="ui dividing header"><i class="film icon"></i>
+            <div class="content">歌詞アニメーション
+              <div class="sub header">TextAliveが歌詞アニメーションを自動生成</div>
+            </div>
+          </h2>
+          <div id="player-root"></div>
         </div>
       </section>
       <div class="ui basic center aligned segment">
@@ -49,7 +80,11 @@
         </footer>
       </div>
     </div>
-    <script src="javascripts/jquery-3.2.1.min.js"></script>
+    <script src="javascripts/jquery-3.3.1.min.js"></script>
     <script src="semantic/semantic.min.js"></script>
+    <script src="http://textalive.jp/javascripts/require.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script>require(['main']);</script>
+    <script src="http://textalive.jp/javascripts/api/embed-v1.js"></script>
   </body>
 </html>

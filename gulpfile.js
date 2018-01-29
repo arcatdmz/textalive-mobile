@@ -11,7 +11,12 @@ gulp.task('semantic', require('./semantic/tasks/build'));
 gulp.task('pug', function(){
   return gulp.src('src/**/*.pug')
     .pipe(pug({
-      locals: { package: packageJson },
+      locals: {
+          package: packageJson
+        , taDomain: 'textalive.jp'
+        , ja: true
+        , songs: require('./songs.json')
+      },
       verbose: true,
       pretty: true
     }))
@@ -21,7 +26,7 @@ gulp.task('pug', function(){
 gulp.task('ts', function(){
   return gulp.src('src/typescripts/**/*.ts')
     .pipe(tsProject())
-    .pipe(gulp.dest('docs/javascripts/'));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('browser-sync', function(){
@@ -33,6 +38,7 @@ gulp.task('browser-sync', function(){
     });
     gulp.watch('docs/**/*.{html,js}', ['reload']);
     gulp.watch('src/**/*.pug', ['pug']);
+    gulp.watch('src/typescripts/**/*.ts', ['ts']);
   });
   
 gulp.task('reload', function(){

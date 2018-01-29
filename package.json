@@ -24,5 +24,9 @@
     "gulp-typescript": "^3.2.4",
     "semantic-ui": "^2.2.13",
     "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.2.17",
+    "@types/semantic-ui": "^2.2.6"
   }
 }

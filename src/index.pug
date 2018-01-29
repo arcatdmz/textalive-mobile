@@ -1,3 +1,4 @@
+
 mixin header(message)
   h1.ui.header
     i.lab.icon
@@ -26,9 +27,7 @@ mixin music-searcher
     button.ui.button #{ja ? '検索' : 'Search'}
 
 mixin body
-  -
-    const songs = [], ja = true;
-  section: .ui.segment
+  section#input: .ui.segment
     h2.ui.dividing.header
       i.music.icon
       .content #{ja ? '音楽の選択' : 'Choose your song'}
@@ -39,11 +38,18 @@ mixin body
           .grouped.fields#music-selector: +music-selector()
         .eight.wide.column
           .field#music-searcher: +music-searcher()
-      .ui.warning.message #{ja ? '検索結果が見つかりませんでした。' : 'Your search query returned zero result.'}
+          .ui.warning.message #{ja ? '検索結果が見つかりませんでした。' : 'Your search query returned zero result.'}
       .ui.center.aligned.basic.segment#start
-        button.ui.huge.primary.button(type='submit')
+        button.ui.huge.primary.button
           i.video.play.icon
           | #{ja ? '再生する' : 'Play music'}
+  .ui.hidden.divider
+  section#output: .ui.segment
+    h2.ui.dividing.header
+      i.film.icon
+      .content #{ja ? '歌詞アニメーション' : 'Lyrics animation'}
+        .sub.header #{ja ? 'TextAliveが歌詞アニメーションを自動生成' : 'Kinetic typography videos are automatically synthesized using TextAlive'}
+    #player-root
 
 mixin footer
   .ui.divider
@@ -54,14 +60,21 @@ mixin footer
 doctype html
 html(lang='ja')
   head
-    title Hello World!
+    title #{package.description}
     link(rel='stylesheet', href='semantic/semantic.min.css')
     style(type='text/css').
       footer { text-align: center; }
   body
+    .ui.dimmer
+      .ui.text.loader #{ja ? '読み込み中…' : 'Loading'}
     .ui.container
       .ui.basic.segment: +header(package.description)
       +body()
       .ui.basic.center.aligned.segment: +footer()
-    script(src='javascripts/jquery-3.2.1.min.js')
+    script(src='javascripts/jquery-3.3.1.min.js')
     script(src='semantic/semantic.min.js')
+    script(src=`http://${taDomain}/javascripts/require.js`)
+    script(src='javascripts/main.js')
+    script.
+      require(['main']);
+    script(src=`http://${taDomain}/javascripts/api/embed-v1.js`)
