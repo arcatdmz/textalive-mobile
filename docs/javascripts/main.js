@@ -57,7 +57,7 @@ define("SongleWidgetAPIClient", ["require", "exports"], function (require, expor
     function stripProtocol(url) {
         var stripper = /^(ht|f)tps?:\/\/(.+)$/.exec(url);
         if (stripper)
-            url = stripper[1];
+            url = stripper[2];
         return url;
     }
     exports.stripProtocol = stripProtocol;

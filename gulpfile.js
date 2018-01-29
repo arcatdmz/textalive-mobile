@@ -45,4 +45,4 @@ gulp.task('reload', function(){
     browserSync.reload();
   });
 
-gulp.task('default', ['semantic', 'pug']);
+gulp.task('default', ['semantic', 'pug', 'ts']);
