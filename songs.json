@@ -3,12 +3,18 @@
     "url": "http://piapro.jp/t/QVs8/20110115011217",
     "artist": "40メートルP",
     "title": "妄想スケッチ",
-    "type": "piapro"
+    "type": "ピアプロ"
+  },
+  {
+    "url": "http://www.youtube.com/watch?v=Za3SaGnFCFI",
+    "artist": "primary",
+    "title": "Awake",
+    "type": "YouTube"
   },
   {
     "url": "http://www.nicovideo.jp/watch/sm6326371",
     "artist": "リツカ",
     "title": "tripster",
-    "type": "nicovideo"
+    "type": "ニコ動"
   }
 ]
