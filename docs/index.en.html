@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <title>TextAlive Mobile</title>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="ui dimmer">
-      <div class="ui text loader">読み込み中…</div>
+      <div class="ui text loader">Loading</div>
     </div>
     <div class="ui container">
       <div class="ui basic segment">
@@ -18,22 +18,22 @@
       </div>
       <section id="message">
         <div class="ui segment">
-          <p><a href="http://textalive.jp">TextAlive</a>による歌詞アニメーションの自動生成機能を手軽に試せるWebサイトです。</p>
+          <p><a href="http://textalive.jp">TextAlive</a> enables automatic synthesis of lyrics animation, which is demonstrated on this website with the simple user interface.</p>
         </div>
       </section>
       <div class="ui hidden divider"></div>
       <section id="input">
         <div class="ui segment">
           <h2 class="ui dividing header"><i class="music icon"></i>
-            <div class="content">音楽の選択
-              <div class="sub header">Songleに登録されている111万曲以上から選択</div>
+            <div class="content">Choose your song
+              <div class="sub header">Over a million and a hundred thousand of songs are available</div>
             </div>
           </h2>
           <div class="ui form">
             <div class="ui stackable grid">
               <div class="eight wide column">
                 <div class="grouped fields" id="music-selector">
-                  <label for="music">おすすめ楽曲から選ぶ:</label>
+                  <label for="music">Our recommendations:</label>
                   <div class="field">
                     <div class="ui radio checkbox">
                       <input class="hidden" type="radio" name="music" tabindex="0" value="https://daniwell.github.io/assets/mp3/nekomimi.mp3" checked="checked"/>
@@ -73,19 +73,19 @@
               </div>
               <div class="eight wide column">
                 <div class="field" id="music-searcher">
-                  <label for="music-search">楽曲を探す:</label>
+                  <label for="music-search">Look for your favorite song:</label>
                   <form class="ui action input">
-                    <input type="text" placeholder="曲名, アーティスト名, URLなど" name="music-search"/>
-                    <button class="ui button">検索</button>
+                    <input type="text" placeholder="Song name, artist name, URL, etc." name="music-search"/>
+                    <button class="ui button">Search</button>
                   </form>
                 </div>
                 <div class="ui warning message">
-                  <div class="header">検索結果が見つかりませんでした。</div>
+                  <div class="header">Your search query returned zero result.</div>
                 </div>
               </div>
             </div>
             <div class="ui center aligned basic segment" id="start">
-              <button class="ui huge primary button"><i class="video play icon"></i>再生する</button>
+              <button class="ui huge primary button"><i class="video play icon"></i>Play music</button>
             </div>
           </div>
         </div>
@@ -94,13 +94,13 @@
       <section id="output">
         <div class="ui segment">
           <h2 class="ui dividing header"><i class="film icon"></i>
-            <div class="content">歌詞アニメーション
-              <div class="sub header">TextAliveが歌詞アニメーションを自動生成</div>
+            <div class="content">Lyrics animation
+              <div class="sub header">Kinetic typography videos are automatically synthesized using TextAlive</div>
             </div>
           </h2>
           <div class="ui hidden warning lyrics message">
             <div class="header"></div>
-            <p>この曲に歌詞をつけるには<a href="http://textalive.jp">TextAlive</a>本サイトにアクセスしてください。</p>
+            <p>Please visit <a href="http://textalive.jp">TextAlive</a> to provide a lyrics URL.</p>
           </div>
           <div id="player-root"></div>
         </div>
@@ -109,7 +109,7 @@
         <div class="ui divider"></div>
         <footer class="ui horizontal divided list">
           <div class="item">&copy; <a href="https://junkato.jp/ja">Jun Kato</a></div>
-          <div class="item">2018</div><a class="item" href="index.en.html">English</a>
+          <div class="item">2018</div><a class="item" href="./">日本語</a>
         </footer>
       </div>
     </div>

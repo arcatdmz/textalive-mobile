@@ -27,6 +27,17 @@ mixin music-searcher
     button.ui.button #{ja ? '検索' : 'Search'}
 
 mixin body
+  section#message: .ui.segment
+    - if (ja) {
+    p
+      a(href='http://textalive.jp') TextAlive
+      | による歌詞アニメーションの自動生成機能を手軽に試せるWebサイトです。
+    - } else {
+    p
+      a(href='http://textalive.jp') TextAlive
+      |  enables automatic synthesis of lyrics animation, which is demonstrated on this website with the simple user interface.
+    - }
+  .ui.hidden.divider
   section#input: .ui.segment
     h2.ui.dividing.header
       i.music.icon
@@ -62,9 +73,10 @@ mixin footer
   footer.ui.horizontal.divided.list
     .item &copy; <a href="https://junkato.jp/ja">Jun Kato</a>
     .item 2018
+    a.item(href=ja ? 'index.en.html' : './') #{ja ? 'English' : '日本語'}
 
 doctype html
-html(lang='ja')
+html(lang=ja ? 'ja' : 'en')
   head
     title #{package.description}
     meta(charset='UTF-8')
