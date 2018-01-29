@@ -38,7 +38,8 @@ mixin body
           .grouped.fields#music-selector: +music-selector()
         .eight.wide.column
           .field#music-searcher: +music-searcher()
-          .ui.warning.message #{ja ? '検索結果が見つかりませんでした。' : 'Your search query returned zero result.'}
+          .ui.warning.message
+            .header #{ja ? '検索結果が見つかりませんでした。' : 'Your search query returned zero result.'}
       .ui.center.aligned.basic.segment#start
         button.ui.huge.primary.button
           i.video.play.icon
@@ -49,6 +50,11 @@ mixin body
       i.film.icon
       .content #{ja ? '歌詞アニメーション' : 'Lyrics animation'}
         .sub.header #{ja ? 'TextAliveが歌詞アニメーションを自動生成' : 'Kinetic typography videos are automatically synthesized using TextAlive'}
+    .ui.hidden.warning.lyrics.message
+      .header
+      p #{ja ? 'この曲に歌詞をつけるには' : 'Please visit '}
+        a(href='http://textalive.jp') TextAlive
+        | #{ja ? '本サイトにアクセスしてください。' : ' to provide a lyrics URL.'}
     #player-root
 
 mixin footer

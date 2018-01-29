@@ -37,6 +37,7 @@ $('#start button').on('click touch', (ev) => {
 
   // 動画を自動生成
   synthesizeVideo(mediaUrl);
+  $('#output .lyrics.message').addClass('hidden').hide();
 });
 
 // 「楽曲を探す」フォーム
@@ -142,7 +143,7 @@ function setStartButtonEnabled(enabled: boolean) {
 }
 
 // 動画を自動生成
-var player: any = null;
+var player: any = null, url: string = '';
 function synthesizeVideo(mediaUrl: string) {
   console.log(`mediaUrl: ${mediaUrl}`);
   if (player) {
@@ -156,6 +157,7 @@ function synthesizeVideo(mediaUrl: string) {
     , onReady: onVideoReady
     , onError: onVideoError});
   player.synthVideo(mediaUrl);
+  url = mediaUrl;
 }
 
 function onVideoReady(player: any) {
@@ -165,4 +167,13 @@ function onVideoReady(player: any) {
 
 function onVideoError(err: any) {
   console.log('error:', err);
+  if (!err) return;
+  if (err.lyrics) {
+    const songPath = SWAPI.createSanitizedPermalink(SWAPI.stripProtocol(url));
+    $('#output .lyrics.message a')
+      .attr('href', `http://textalive.jp/songs/${songPath}`);
+    $('#output .lyrics.message')
+      .removeClass('hidden')
+      .show();
+  }
 }

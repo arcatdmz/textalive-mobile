@@ -26,10 +26,10 @@ export class Song {
     return stripProtocol(this.data.permalink);
   }
   public getTextAliveUrl(): string {
-    return 'http://textalive.jp/songs/' + Song.createSanitizedPermalink(this.getSonglePath());
+    return 'http://textalive.jp/songs/' + createSanitizedPermalink(this.getSonglePath());
   }
   public getSanitizedPermalink(): string {
-    return Song.createSanitizedPermalink(this.getSonglePath());
+    return createSanitizedPermalink(this.getSonglePath());
   }
   public isNicovideo(): boolean {
     return Song.isNicovideoUrl(this.getSanitizedPermalink());
@@ -56,9 +56,6 @@ export class Song {
   }
 
   // static methods
-  public static createSanitizedPermalink(songlePath: string): string {
-    return encodeURIComponent(songlePath);
-  }
   public static isNicovideoUrl(url: string): boolean {
     return /^(www\.)?nicovideo\.jp/i.test(stripProtocol(url));
   }
@@ -68,6 +65,10 @@ export class Song {
   public static isPiaproUrl(url: string): boolean {
     return /^(www\.)?piapro\.jp/i.test(stripProtocol(url));
   }
+}
+
+export function createSanitizedPermalink(songlePath: string): string {
+  return encodeURIComponent(songlePath);
 }
 
 export function stripProtocol(url: string) {

@@ -59,7 +59,9 @@
                     <button class="ui button">検索</button>
                   </form>
                 </div>
-                <div class="ui warning message">検索結果が見つかりませんでした。</div>
+                <div class="ui warning message">
+                  <div class="header">検索結果が見つかりませんでした。</div>
+                </div>
               </div>
             </div>
             <div class="ui center aligned basic segment" id="start">
@@ -76,6 +78,10 @@
               <div class="sub header">TextAliveが歌詞アニメーションを自動生成</div>
             </div>
           </h2>
+          <div class="ui hidden warning lyrics message">
+            <div class="header"></div>
+            <p>この曲に歌詞をつけるには<a href="http://textalive.jp">TextAlive</a>本サイトにアクセスしてください。</p>
+          </div>
           <div id="player-root"></div>
         </div>
       </section>

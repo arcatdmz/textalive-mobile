@@ -11,10 +11,10 @@ define("SongleWidgetAPIClient", ["require", "exports"], function (require, expor
             return stripProtocol(this.data.permalink);
         }
         getTextAliveUrl() {
-            return 'http://textalive.jp/songs/' + Song.createSanitizedPermalink(this.getSonglePath());
+            return 'http://textalive.jp/songs/' + createSanitizedPermalink(this.getSonglePath());
         }
         getSanitizedPermalink() {
-            return Song.createSanitizedPermalink(this.getSonglePath());
+            return createSanitizedPermalink(this.getSonglePath());
         }
         isNicovideo() {
             return Song.isNicovideoUrl(this.getSanitizedPermalink());
@@ -40,9 +40,6 @@ define("SongleWidgetAPIClient", ["require", "exports"], function (require, expor
             return 'http://songle.jp/songs/' + this.getSanitizedPermalink();
         }
         // static methods
-        static createSanitizedPermalink(songlePath) {
-            return encodeURIComponent(songlePath);
-        }
         static isNicovideoUrl(url) {
             return /^(www\.)?nicovideo\.jp/i.test(stripProtocol(url));
         }
@@ -54,6 +51,10 @@ define("SongleWidgetAPIClient", ["require", "exports"], function (require, expor
         }
     }
     exports.Song = Song;
+    function createSanitizedPermalink(songlePath) {
+        return encodeURIComponent(songlePath);
+    }
+    exports.createSanitizedPermalink = createSanitizedPermalink;
     function stripProtocol(url) {
         var stripper = /^(ht|f)tps?:\/\/(.+)$/.exec(url);
         if (stripper)
@@ -120,6 +121,7 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
         }
         // 動画を自動生成
         synthesizeVideo(mediaUrl);
+        $('#output .lyrics.message').addClass('hidden').hide();
     });
     // 「楽曲を探す」フォーム
     $('#music-searcher form').on('submit', (ev) => {
@@ -221,7 +223,7 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
         $button.prop('disabled', !enabled);
     }
     // 動画を自動生成
-    var player = null;
+    var player = null, url = '';
     function synthesizeVideo(mediaUrl) {
         console.log(`mediaUrl: ${mediaUrl}`);
         if (player) {
@@ -237,6 +239,7 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
             onError: onVideoError
         });
         player.synthVideo(mediaUrl);
+        url = mediaUrl;
     }
     function onVideoReady(player) {
         console.log(player);
@@ -244,5 +247,15 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
     }
     function onVideoError(err) {
         console.log('error:', err);
+        if (!err)
+            return;
+        if (err.lyrics) {
+            const songPath = SWAPI.createSanitizedPermalink(SWAPI.stripProtocol(url));
+            $('#output .lyrics.message a')
+                .attr('href', `http://textalive.jp/songs/${songPath}`);
+            $('#output .lyrics.message')
+                .removeClass('hidden')
+                .show();
+        }
     }
 });
