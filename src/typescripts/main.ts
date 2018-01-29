@@ -3,8 +3,7 @@
 
 import * as SWAPI from './SongleWidgetAPIClient';
 
-console.log('Hello World!');
-
+const queries = parseQueryString();
 var Player: any;
 
 $('body').dimmer({
@@ -14,12 +13,10 @@ $('body').dimmer('show');
 setStartButtonEnabled(false);
 
 (<any>self)['taAsyncInit'] = (p: any) => {
-  console.log('TextAlive ready:', p);
+  if (!!queries.debug) console.log('TextAlive ready:', p);
   $('body').dimmer('hide');
   setStartButtonEnabled(true);
   Player = p;
-
-  const queries = parseQueryString();
 
   if (typeof queries.url === 'string') {
     const prefillUrl = decodeURIComponent(queries.url)
@@ -179,7 +176,7 @@ function setStartButtonEnabled(enabled: boolean) {
 // 動画を自動生成
 var player: any = null, url: string = '';
 function synthesizeVideo(mediaUrl: string) {
-  console.log(`mediaUrl: ${mediaUrl}`);
+  if (!!queries.debug) console.log(`mediaUrl: ${mediaUrl}`);
   if (player) {
     try {
       player.dispose();
@@ -195,12 +192,12 @@ function synthesizeVideo(mediaUrl: string) {
 }
 
 function onVideoReady(player: any) {
-  console.log(player);
+  if (!!queries.debug) console.log('player:', player);
   player.setStyle('energetic');
 }
 
 function onVideoError(err: any) {
-  console.log('error:', err);
+  if (!!queries.debug) console.log('error:', err);
   if (!err) return;
   if (err.lyrics) {
     const songPath = SWAPI.createSanitizedPermalink(SWAPI.stripProtocol(url));

@@ -90,7 +90,7 @@ define("SongleWidgetAPIClient", ["require", "exports"], function (require, expor
 define("main", ["require", "exports", "SongleWidgetAPIClient"], function (require, exports, SWAPI) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    console.log('Hello World!');
+    const queries = parseQueryString();
     var Player;
     $('body').dimmer({
         onHide: () => $('#music-searcher input[name=music-search]').focus()
@@ -98,14 +98,13 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
     $('body').dimmer('show');
     setStartButtonEnabled(false);
     self['taAsyncInit'] = (p) => {
-        console.log('TextAlive ready:', p);
+        if (!!queries.debug)
+            console.log('TextAlive ready:', p);
         $('body').dimmer('hide');
         setStartButtonEnabled(true);
         Player = p;
-        const queries = parseQueryString();
         if (typeof queries.url === 'string') {
             const prefillUrl = decodeURIComponent(queries.url), $radio = $('#music-selector input[type=radio]').filter((i, e) => { return $(e).val() === prefillUrl; });
-            console.log(prefillUrl);
             if ($radio.length > 0) {
                 $radio.parent().checkbox('check');
             }
@@ -255,7 +254,8 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
     // 動画を自動生成
     var player = null, url = '';
     function synthesizeVideo(mediaUrl) {
-        console.log(`mediaUrl: ${mediaUrl}`);
+        if (!!queries.debug)
+            console.log(`mediaUrl: ${mediaUrl}`);
         if (player) {
             try {
                 player.dispose();
@@ -272,11 +272,13 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
         url = mediaUrl;
     }
     function onVideoReady(player) {
-        console.log(player);
+        if (!!queries.debug)
+            console.log('player:', player);
         player.setStyle('energetic');
     }
     function onVideoError(err) {
-        console.log('error:', err);
+        if (!!queries.debug)
+            console.log('error:', err);
         if (!err)
             return;
         if (err.lyrics) {
