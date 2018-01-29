@@ -123,6 +123,10 @@ define("main", ["require", "exports", "SongleWidgetAPIClient"], function (requir
         synthesizeVideo(mediaUrl);
         $('#output .lyrics.message').addClass('hidden').hide();
     });
+    // 「楽曲を選ぶ」フォーム
+    $('#music-selector .ui.radio.checkbox').checkbox({
+        onChange: () => setStartButtonEnabled(true)
+    });
     // 「楽曲を探す」フォーム
     $('#music-searcher form').on('submit', (ev) => {
         ev.preventDefault();
